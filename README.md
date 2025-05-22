@@ -5,7 +5,7 @@
 - Git
 - [Stow](https://www.gnu.org/software/stow/)
 
-# Instalattion
+# Instalation
 
 ```git clone https://github.com/derikoliveira/dotfiles.git && cd dotfiles```
 
