@@ -7,6 +7,7 @@ italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
 import = ["monokai-pro-alacritty.toml"]
 
 [window]
-padding = { x = 8, y = 8 }
+padding = { x = 10, y = 5 }
 decorations = "none"
 opacity = 0.95
+dynamic_padding = true
