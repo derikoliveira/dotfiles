@@ -691,7 +691,6 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -706,6 +705,7 @@ require('lazy').setup({
             },
           },
         },
+        ruff = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -896,6 +896,7 @@ require('lazy').setup({
       ---@diagnostic disable-next-line: missing-fields
       -- require('tokyonight').setup {
       require('monokai-pro').setup {
+
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
