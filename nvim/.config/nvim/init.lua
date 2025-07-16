@@ -1,25 +1,5 @@
 --[[
 
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .----------------------.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ___________      ========
-========        /::::::::::|  |::::::::::\  \ no mouse \     ========
-========       /:::========|  |==hjkl==:::\  \ required \    ========
-========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
-
 What is Kickstart?
 
   Kickstart.nvim is *not* a distribution.
@@ -201,6 +181,17 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- " Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
+-- nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+-- nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+-- nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+-- nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+-- vim.keymap.set('n', '<CR>', 'o<Esc>k')
+-- vim.keymap.set('n', '<S-CR>', 'O<Esc>j')
+
+vim.keymap.set('n', '<silent><Alt-j>', ':set paste<CR>m`O<Esc>``:set nopaste<CR>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -785,6 +776,8 @@ require('lazy').setup({
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
         json = { 'prettier' },
         jsonc = { 'prettier' },
+        yaml = { 'prettier' },
+        ['yaml.kubernetes'] = { 'prettier' },
       },
     },
   },
@@ -898,7 +891,6 @@ require('lazy').setup({
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      -- require('tokyonight').setup {
       require('monokai-pro').setup {
         transparent_background = true,
         styles = {
@@ -993,7 +985,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -1027,6 +1019,18 @@ require('lazy').setup({
     },
   },
 })
+
+require('lspconfig').yamlls.setup {
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = '*.k8s.yaml',
+      },
+    },
+  },
+}
+
+require 'config/keymaps'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
