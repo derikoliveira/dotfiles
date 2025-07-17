@@ -73,6 +73,7 @@ qt5ct
 qt6ct
 reflector
 ripgrep
+rofi
 sassc
 sbctl
 sbsigntools
@@ -99,7 +100,6 @@ waybar
 wget
 wireplumber
 wlogout
-wofi
 xdg-desktop-portal-hyprland
 xdg-user-dirs
 yay
