@@ -75,8 +75,6 @@ bindkey -M vicmd '^Y' autosuggest-accept
 # ============================================================================
 # ENVIRONMENT VARIABLES
 # ============================================================================
-if [ -d "$HOME/scripts" ]; then export PATH="$PATH:$HOME/scripts"; fi
-
 # Compilation flags
 export ARCHFLAGS="-arch $(uname -m)"
 
@@ -108,6 +106,8 @@ export NVM_DIR="$HOME/.config/nvm"
 alias nvimconfig="$EDITOR $NVIM_DIR/init.lua"
 alias zshconfig="$EDITOR ~/.zshrc"
 alias zshreload="source ~/.zshrc"
+alias ts="$HOME/scripts/tmux-switcher.sh"
+alias tsi="$HOME/scripts/tmux-switcher.sh -i"
 
 # Modern alternatives
 command -v exa >/dev/null && alias ls='exa'
