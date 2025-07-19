@@ -31,7 +31,7 @@ setopt COMPLETE_ALIASES
 setopt AUTO_CD
 setopt CORRECT
 
-plugins=(git fzf z zsh-autosuggestions fast-syntax-highlighting)
+plugins=(git fzf zsh-autosuggestions fast-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # This tells zsh-autosuggestions to use both history AND completion
@@ -75,6 +75,8 @@ bindkey -M vicmd '^Y' autosuggest-accept
 # ============================================================================
 # ENVIRONMENT VARIABLES
 # ============================================================================
+if [ -d "$HOME/scripts" ]; then export PATH="$PATH:$HOME/scripts"; fi
+
 # Compilation flags
 export ARCHFLAGS="-arch $(uname -m)"
 
@@ -119,6 +121,6 @@ command -v ripgrep >/dev/null && alias grep='rg'
 # Load local environment if exists
 [ -f "$HOME/.local/share/../bin/env" ] && . "$HOME/.local/share/../bin/env"
 
-# UV completion
 command -v uv >/dev/null && eval "$(uv generate-shell-completion zsh)"
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
