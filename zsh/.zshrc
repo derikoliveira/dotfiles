@@ -115,6 +115,14 @@ command -v bat >/dev/null && alias cat='bat --plain' && alias less='bat'
 command -v fd >/dev/null && alias find='fd'
 command -v ripgrep >/dev/null && alias grep='rg'
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 # ============================================================================
 # INITIALIZATION
 # ============================================================================

@@ -1,3 +1,4 @@
+7zip
 alacritty
 alsa-utils
 amd-ucode
@@ -8,6 +9,8 @@ bind
 blueman
 bluez
 bluez-utils
+bridge-utils
+chafa
 cliphist
 discord
 dnsmasq
@@ -36,6 +39,7 @@ hyprpicker
 hyprpolkitagent
 hyprsunset
 iptables-nft
+jq
 kdb
 libcamera
 libnewt
@@ -63,6 +67,7 @@ pipewire-audio
 pipewire-pulse
 pkgconf
 pkgstats
+poppler
 python-gobject
 python-pywal
 qemu-full
@@ -103,5 +108,7 @@ wlogout
 xdg-desktop-portal-hyprland
 xdg-user-dirs
 yay
+yazi
+zoxide
 zsh
 zsh-completions
