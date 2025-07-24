@@ -40,37 +40,11 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 # ============================================================================
-# VI MODE CONFIGURATION
-# ============================================================================
-# Enable vi mode
-bindkey -v
-# Reduce key delay for faster mode switching
-export KEYTIMEOUT=1
-
-CURSOR_BEAM='\e[5 q'
-CURSOR_BLOCK='\e[1 q'
-
-# Change cursor based on mode
-function zle-keymap-select {
-    if [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
-        echo -ne $CURSOR_BEAM
-    else
-        echo -ne $CURSOR_BLOCK
-    fi
-}
-zle -N zle-keymap-select
-
-# Start in insert mode
-function zle-line-init { zle -K viins }
-zle -N zle-line-init
-
-# ============================================================================
 # CUSTOM KEYBINDS
 # ============================================================================
 # zsh-autosuggestions
 # Bind ctrl-y in both vi insert and command modes
-bindkey -M viins '^Y' autosuggest-accept
-bindkey -M vicmd '^Y' autosuggest-accept
+bindkey '^Y' autosuggest-accept
 
 # ============================================================================
 # ENVIRONMENT VARIABLES
@@ -78,12 +52,7 @@ bindkey -M vicmd '^Y' autosuggest-accept
 # Compilation flags
 export ARCHFLAGS="-arch $(uname -m)"
 
-# Editor
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
+export EDITOR='nvim'
 
 # Enhanced FZF configuration
 export FZF_DEFAULT_OPTS="--bind 'ctrl-y:accept' --height 40% --reverse --border --preview-window=right:50%:wrap"
@@ -103,25 +72,10 @@ export NVM_DIR="$HOME/.config/nvm"
 # ============================================================================
 # ALIASES
 # ============================================================================
-alias nvimconfig="$EDITOR $NVIM_DIR/init.lua"
-alias zshconfig="$EDITOR ~/.zshrc"
-alias zshreload="source ~/.zshrc"
-alias ts="$HOME/scripts/tmux-switcher.sh"
-alias tsi="$HOME/scripts/tmux-switcher.sh -i"
-
-# Modern alternatives
 command -v exa >/dev/null && alias ls='exa'
 command -v bat >/dev/null && alias cat='bat --plain' && alias less='bat'
 command -v fd >/dev/null && alias find='fd'
 command -v ripgrep >/dev/null && alias grep='rg'
-
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
 
 # ============================================================================
 # INITIALIZATION
