@@ -1,4 +1,0 @@
-[[language]]
-name = "python"
-language-servers = [ { name = "pyright", except-features = [ "format" ] }, "ruff"]
-auto-format = true
