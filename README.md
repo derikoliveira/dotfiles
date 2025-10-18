@@ -1,42 +1,40 @@
-# My dotfiles
+# Dotfiles
 
-## Dependencies
+Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-- Git
-- [Stow](https://www.gnu.org/software/stow/)
+## Contents
 
-## Instalation
+This repository includes configurations for:
 
-```git clone https://github.com/derikoliveira/dotfiles.git && cd dotfiles```
+- **git**
+- **neovim**
+- **zed**
+- **zsh** (with [pure](https://github.com/sindresorhus/pure) prompt)
 
-## Usage
+## Installation
 
-Link the directories using stow
-
-```stow <directory_name>```
-
-## Install packages
-
-```sudo xargs -a packages.txt apt install -y```
-
-### Packages with manual instalation
-
-#### Neovim
-
-[GitHub](https://github.com/neovim/neovim)
+Clone this repository:
 
 ```bash
-curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
-tar -xzf nvim-linux-x86_64.tar.gz && rm nvim-linux-x86_64.tar.gz
-sudo mv nvim-linux-x86_64 /opt/nvim
-sudo ln -s /opt/nvim/bin/nvim /usr/local/bin/nvim
+git clone https://github.com/derikoliveira/dotfiles.git
+cd dotfiles
 ```
 
-#### Pure
-
-[GitHub](https://github.com/sindresorhus/pure)
+Run the installation script:
 
 ```bash
-mkdir -p "$HOME/.config/zsh"
-git clone https://github.com/sindresorhus/pure.git "$HOME/.config/zsh"
+chmod +x install.sh
+./install.sh
 ```
+
+## Requirements
+
+Debian/Ubuntu-based system
+
+## Notes
+
+You can safely re-run the install script anytime.
+
+The script uses the current directory as the dotfiles source.
+
+To customize, edit install.sh or packages.txt as needed.
