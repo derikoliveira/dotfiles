@@ -7,7 +7,7 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
 This repository includes configurations for:
 
 - **git**
-- **neovim**
+- **helix**
 - **zed**
 - **zsh** (with [pure](https://github.com/sindresorhus/pure) prompt)
 

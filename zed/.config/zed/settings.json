@@ -1,5 +1,10 @@
 {
   "helix_mode": true,
+  "languages": {
+    "Python": {
+      "language_servers": ["basedpyright", "ruff"]
+    }
+  },
   "theme": {
     "mode": "system",
     "light": "Ayu Light",

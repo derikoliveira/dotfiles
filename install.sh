@@ -32,7 +32,7 @@ mkdir -p "$HOME/.config"
 
 log "Stowing dotfiles"
 cd "$DOTFILES_DIR"
-for pkg in git nvim zed zsh zshenv; do
+for pkg in git helix zed zsh zshenv; do
     if [[ -d "$pkg" ]]; then
         stow -v -R -t "$HOME" "$pkg"
     else
@@ -40,15 +40,33 @@ for pkg in git nvim zed zsh zshenv; do
     fi
 done
 
-if ! command -v nvim >/dev/null 2>&1; then
-    log "Installing Neovim nightly"
-    curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
-    tar -xzf nvim-linux-x86_64.tar.gz
-    sudo mv nvim-linux-x86_64 /opt/nvim
-    sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
-    rm -f nvim-linux-x86_64.tar.gz
+if ! command -v hx > /dev/null 2>&1; then
+    log "Installing Helix"
+    curl -LO https://github.com/helix-editor/helix/releases/download/25.07.1/helix-25.07.1-x86_64-linux.tar.xz
+    tar -xJf helix-25.07.1-x86_64-linux.tar.xz
+    sudo mv helix-25.07.1-x86_64-linux /opt/helix
+    sudo ln -sf /opt/helix/hx /usr/local/bin/hx
+    rm -f helix-25.07.1-x86_64-linux.tar.xz
 else
-  log "Neovim already installed, skipping"
+    log "Helix already installed, skipping"
+fi
+
+if ! command -v uv > /dev/null 2>&1; then
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+else
+    log "uv is already installed, skipping"
+fi
+
+if ! command -v ruff > /dev/null 2>&1; then
+    uv tool install ruff@latest
+else
+    log "ruff is already installed, skipping"
+fi
+
+if ! command -v basedpyright > /dev/null 2>&1; then
+    uv tool install basedpyright@latest
+else
+    log "basedpyright is already installed, skipping"
 fi
 
 PURE_DIR="$HOME/.config/zsh/pure"
