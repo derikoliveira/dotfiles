@@ -7,6 +7,5 @@ lsd
 ripgrep
 stow
 tree
-wl-clipboard
 zoxide
 zsh
