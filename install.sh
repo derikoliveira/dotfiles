@@ -32,7 +32,7 @@ mkdir -p "$HOME/.config"
 
 log "Stowing dotfiles"
 cd "$DOTFILES_DIR"
-for pkg in git helix zed zsh zshenv; do
+for pkg in git helix zsh zshenv; do
     if [[ -d "$pkg" ]]; then
         stow -v -R -t "$HOME" "$pkg"
     else
@@ -54,20 +54,12 @@ fi
 if ! command -v uv > /dev/null 2>&1; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 else
-    log "uv is already installed, skipping"
+    log "uv is already installed, updating"
+    uv self update
 fi
 
-if ! command -v ruff > /dev/null 2>&1; then
-    uv tool install ruff@latest
-else
-    log "ruff is already installed, skipping"
-fi
-
-if ! command -v basedpyright > /dev/null 2>&1; then
-    uv tool install basedpyright@latest
-else
-    log "basedpyright is already installed, skipping"
-fi
+uv tool install --upgrade ruff@latest
+uv tool install --upgrade basedpyright@latest
 
 PURE_DIR="$HOME/.config/zsh/pure"
 if [[ ! -d "$PURE_DIR" ]]; then
