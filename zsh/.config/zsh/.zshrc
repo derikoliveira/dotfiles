@@ -30,5 +30,6 @@ bindkey '^R' fh
 export FZF_DEFAULT_OPTS="--bind 'ctrl-y:accept' --height 40% --reverse --border --preview-window=right:50%:wrap"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | batcat -p -lman'"
 
 export PATH="$HOME/.local/bin:$PATH"
