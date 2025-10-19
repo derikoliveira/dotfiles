@@ -3,30 +3,28 @@ set -euo pipefail
 IFS=$'\n\t'
 cd "$(dirname "$0")"
 
+CYAN="\033[0;36m"
+RED="\033[0;31m"
 RESET="\033[0m"
 
-log_info() {
-    echo -e "$*"
-}
+log_info() { echo -e "$*"; }
 
-log_step() {
-    CYAN="\033[0;36m"
-    echo -e "$CYAN$*$RESET"
-}
+log_step() { echo -e "$CYAN$*$RESET"; }
 
-log_error() {
-    RED="\033[0;31m"
-    echo -e "$RED$*$RESET" >&2
-}
+log_error() { echo -e "$RED$*$RESET" >&2; }
 
-DOTFILES_DIR="$(pwd)"
-PACKAGES_FILE="$DOTFILES_DIR/packages.txt"
+trap 'log_error "An unexpected error occurred. Exiting..."; exit 1' ERR
+trap 'log_error "\nScript interrupted"; exit 130' INT
 
 if [[ $EUID -eq 0 ]]; then
     # stow and user configs shouldn’t be owned by root
     log_error "Do not run as root. The script will use sudo when needed."
     exit 1
 fi
+
+DOTFILES_DIR="$(pwd)"
+PACKAGES_FILE="$DOTFILES_DIR/packages.txt"
+HELIX_VERSION="25.07.1"
 
 log_step "Starting installation"
 
@@ -60,11 +58,13 @@ fi
 
 log_step "Installing Helix"
 if ! command -v hx > /dev/null 2>&1; then
-    curl -LO https://github.com/helix-editor/helix/releases/download/25.07.1/helix-25.07.1-x86_64-linux.tar.xz
-    tar -xJf helix-25.07.1-x86_64-linux.tar.xz
-    sudo mv helix-25.07.1-x86_64-linux /opt/helix
+    HELIX_TAR="helix-${HELIX_VERSION}-x86_64-linux.tar.xz"
+    HELIX_DIR="helix-${HELIX_VERSION}-x86_64-linux"
+    curl -LO "https://github.com/helix-editor/helix/releases/download/${HELIX_VERSION}/${HELIX_TAR}"
+    tar -xJf "$HELIX_TAR"
+    sudo mv "$HELIX_DIR" /opt/helix
     sudo ln -sf /opt/helix/hx /usr/local/bin/hx
-    rm -f helix-25.07.1-x86_64-linux.tar.xz
+    rm -f "$HELIX_TAR"
 else
     log_info "Helix already installed, skipping"
 fi
@@ -78,8 +78,7 @@ else
 fi
 
 log_step "Installing uv packages"
-# Using absolute path because uv might not be in the environment
-UV_PATH="$HOME/.local/bin/uv"
+UV_PATH="$(command -v uv || echo "$HOME/.local/bin/uv")"
 $UV_PATH tool install --upgrade ruff@latest
 $UV_PATH tool install --upgrade basedpyright@latest
 
