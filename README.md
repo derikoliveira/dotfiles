@@ -35,6 +35,10 @@ Debian/Ubuntu-based system
 
 You can safely re-run the install script anytime.
 
-The script uses the current directory as the dotfiles source.
+## Testing
 
-To customize, edit install.sh or packages.txt as needed.
+For a "fresh" test docker can be used:
+
+```bash
+docker rm -f ubuntu_test_1 >/dev/null 2>&1 || true && docker build . -t ubuntu_test:latest && docker run -it --rm --name ubuntu_test_1 ubuntu_test
+``

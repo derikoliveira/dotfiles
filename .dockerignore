@@ -1,0 +1,12 @@
+**.git
+**.gitignore
+zed
+Dockerfile
+LICENSE
+**.md
+
+# Zsh
+**zcompdump
+**.zsh_history
+**.zsh_sessions
+**pure
