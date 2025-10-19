@@ -1,4 +1,5 @@
 bat
+ca-certificates
 curl
 fzf
 git

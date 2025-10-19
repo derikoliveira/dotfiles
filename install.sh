@@ -58,7 +58,7 @@ fi
 
 log_step "Changing default shell to zsh"
 if [[ "${SHELL}" != "$(command -v zsh)" ]]; then
-    chsh -s "$(command -v zsh)"
+    sudo chsh -s "$(command -v zsh)"
 else
     log_info "Zsh already set as default shell"
 fi
@@ -88,5 +88,31 @@ fi
 log_step "Installing uv packages"
 uv tool install --upgrade ruff@latest
 uv tool install --upgrade basedpyright@latest
+
+log_step "Installing docker"
+if ! command -v docker > /dev/null 2>&1; then
+    # Uninstall all conflicting packages
+    for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+    # Add Docker's official GPG key:
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    # Add the repository to Apt sources:
+    echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+        $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    # Install
+    sudo apt update
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    # Run docker without sudo
+    if ! getent group docker > /dev/null 2>&1; then
+        sudo groupadd docker
+    fi
+    sudo usermod -aG docker $USER
+    log_info "Added ${USER} to docker group. Log out and log back in (or run 'newgrp docker') to apply"
+else
+    log_info "Docker is already installed, skipping"
+fi
 
 log_step "Installation complete"
