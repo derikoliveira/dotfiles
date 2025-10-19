@@ -72,15 +72,15 @@ fi
 log_step "Installing uv"
 if ! command -v uv > /dev/null 2>&1; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
+    export PATH="${HOME}/.local/bin:$PATH"
 else
     log_info "uv is already installed, updating"
     uv self update
 fi
 
 log_step "Installing uv packages"
-UV_PATH="$(command -v uv || echo "${HOME}/.local/bin/uv")"
-"${UV_PATH}" tool install --upgrade ruff@latest
-"${UV_PATH}" tool install --upgrade basedpyright@latest
+uv tool install --upgrade ruff@latest
+uv tool install --upgrade basedpyright@latest
 
 log_step "Changing default shell to zsh"
 if [[ "${SHELL}" != "$(command -v zsh)" ]]; then
