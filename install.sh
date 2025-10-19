@@ -42,6 +42,15 @@ for pkg in git helix zsh zshenv; do
     fi
 done
 
+PURE_DIR="$HOME/.config/zsh/pure"
+if [[ ! -d "$PURE_DIR" ]]; then
+    log "Installing Pure prompt"
+    git clone https://github.com/sindresorhus/pure.git "$PURE_DIR"
+else
+    log "Pure already installed, pulling latest changes"
+    git -C "$PURE_DIR" pull
+fi
+
 if ! command -v hx > /dev/null 2>&1; then
     log "Installing Helix"
     curl -LO https://github.com/helix-editor/helix/releases/download/25.07.1/helix-25.07.1-x86_64-linux.tar.xz
@@ -62,15 +71,6 @@ fi
 
 $UV_PATH tool install --upgrade ruff@latest
 $UV_PATH tool install --upgrade basedpyright@latest
-
-PURE_DIR="$HOME/.config/zsh/pure"
-if [[ ! -d "$PURE_DIR" ]]; then
-    log "Installing Pure prompt"
-    git clone https://github.com/sindresorhus/pure.git "$PURE_DIR"
-else
-    log "Pure already installed, pulling latest changes"
-    git -C "$PURE_DIR" pull
-fi
 
 if [[ "$SHELL" != "$(command -v zsh)" ]]; then
     log "Changing default shell to zsh"
