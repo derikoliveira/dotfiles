@@ -56,6 +56,13 @@ else
     git -C "${PURE_DIR}" pull
 fi
 
+log_step "Changing default shell to zsh"
+if [[ "${SHELL}" != "$(command -v zsh)" ]]; then
+    chsh -s "$(command -v zsh)"
+else
+    log_info "Zsh already set as default shell"
+fi
+
 log_step "Installing Helix"
 if ! command -v hx > /dev/null 2>&1; then
     HELIX_TAR="helix-${HELIX_VERSION}-x86_64-linux.tar.xz"
@@ -81,12 +88,5 @@ fi
 log_step "Installing uv packages"
 uv tool install --upgrade ruff@latest
 uv tool install --upgrade basedpyright@latest
-
-log_step "Changing default shell to zsh"
-if [[ "${SHELL}" != "$(command -v zsh)" ]]; then
-    chsh -s "$(command -v zsh)"
-else
-    log_info "Zsh already set as default shell"
-fi
 
 log_step "Installation complete"
