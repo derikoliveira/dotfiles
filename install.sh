@@ -95,7 +95,9 @@ uv tool install --upgrade basedpyright@latest
 log_step "Installing docker"
 if ! command -v docker > /dev/null 2>&1; then
     # Uninstall all conflicting packages
-    for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+    for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
+        sudo apt-get remove -y "${pkg}" 2>/dev/null || true;
+    done
     # Add Docker's official GPG key:
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
