@@ -8,9 +8,7 @@ RED="\033[0;31m"
 RESET="\033[0m"
 
 log_info() { echo -e "$*"; }
-
 log_step() { echo -e "$CYAN$*$RESET"; }
-
 log_error() { echo -e "$RED$*$RESET" >&2; }
 
 trap 'log_error "An unexpected error occurred. Exiting..."; exit 1' ERR
@@ -34,6 +32,7 @@ if [[ -f "$PACKAGES_FILE" ]]; then
     sudo xargs -a "$PACKAGES_FILE" apt install -y
 else
     log_error "packages.txt not found in $DOTFILES_DIR"
+    exit 1
 fi
 
 log_step "Stowing dotfiles"
