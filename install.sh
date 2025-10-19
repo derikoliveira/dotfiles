@@ -4,6 +4,8 @@ IFS=$'\n\t'
 
 DOTFILES_DIR="$(pwd)"
 PACKAGES_FILE="$DOTFILES_DIR/packages.txt"
+# As it might not be in the current PATH, using absolute uv path
+UV_PATH="$HOME/.local/bin/uv"
 
 log() {
     echo -e "\033[1;32m[+] $1\033[0m"
@@ -58,8 +60,8 @@ else
     uv self update
 fi
 
-uv tool install --upgrade ruff@latest
-uv tool install --upgrade basedpyright@latest
+$UV_PATH tool install --upgrade ruff@latest
+$UV_PATH tool install --upgrade basedpyright@latest
 
 PURE_DIR="$HOME/.config/zsh/pure"
 if [[ ! -d "$PURE_DIR" ]]; then
