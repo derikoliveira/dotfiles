@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-SSH_DIR="${1:-$HOME/.ssh}"
+SSH_DIR="${1:-$HOME/.ssh/}"
 
 if [[ ! -d "$SSH_DIR" ]]; then
     echo "Directory not found: $SSH_DIR";
