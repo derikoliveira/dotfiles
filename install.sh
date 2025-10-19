@@ -20,6 +20,9 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
+# Request sudo access upfront
+sudo -v
+
 DOTFILES_DIR="$(pwd)"
 PACKAGES_FILE="${DOTFILES_DIR}/packages.txt"
 HELIX_VERSION="25.07.1"
@@ -58,7 +61,7 @@ fi
 
 log_step "Changing default shell to zsh"
 if [[ "${SHELL}" != "$(command -v zsh)" ]]; then
-    sudo chsh -s "$(command -v zsh)"
+    sudo chsh -s "$(command -v zsh)" "$(whoami)"
 else
     log_info "Zsh already set as default shell"
 fi
