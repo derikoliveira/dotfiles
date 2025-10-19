@@ -29,6 +29,7 @@ log_step "Starting installation"
 log_step "Installing packages"
 if [[ -f "${PACKAGES_FILE}" ]]; then
     log_info "Packages file: ${DOTFILES_DIR}"
+    sudo apt update
     sudo xargs -a "${PACKAGES_FILE}" apt install -y
 else
     log_error "packages.txt not found in ${DOTFILES_DIR}"
