@@ -32,8 +32,8 @@ log_step "Starting installation"
 log_step "Installing packages"
 if [[ -f "${PACKAGES_FILE}" ]]; then
     log_info "Packages file: ${DOTFILES_DIR}"
-    sudo apt update
-    sudo xargs -a "${PACKAGES_FILE}" apt install -y
+    sudo apt-get update
+    sudo xargs -a "${PACKAGES_FILE}" apt-get install -y
 else
     log_error "packages.txt not found in ${DOTFILES_DIR}"
     exit 1
@@ -108,8 +108,8 @@ if ! command -v docker > /dev/null 2>&1; then
         $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     # Install
-    sudo apt update
-    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     # Run docker without sudo
     if ! getent group docker > /dev/null 2>&1; then
         sudo groupadd docker
