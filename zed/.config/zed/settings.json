@@ -1,13 +1,13 @@
 {
-  "helix_mode": true,
+  "vim_mode": true,
   "languages": {
     "Python": {
-      "language_servers": ["basedpyright", "ruff"]
+      "language_servers": ["basedpyright"]
     }
   },
   "theme": {
     "mode": "system",
     "light": "Ayu Light",
-    "dark": "Ayu Dark"
+    "dark": "Zedokai"
   }
 }
