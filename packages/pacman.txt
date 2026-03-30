@@ -1,0 +1,14 @@
+bat
+ca-certificates
+curl
+docker
+fzf
+git
+helix
+lsd
+ripgrep
+stow
+tree
+uv
+zoxide
+zsh

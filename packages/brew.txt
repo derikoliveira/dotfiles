@@ -1,0 +1,12 @@
+bat
+curl
+fzf
+git
+helix
+lsd
+ripgrep
+stow
+tree
+uv
+zoxide
+zsh

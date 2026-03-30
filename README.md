@@ -1,44 +1,67 @@
 # Dotfiles
 
-Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
+Personal configs managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-## Contents
+## Configs
 
-This repository includes configurations for:
+| Package | Description |
+|---------|-------------|
+| `git`   | Git config |
+| `helix` | Helix editor (ayu_dark theme, Python LSP) |
+| `nvim`  | Neovim config |
+| `zed`   | Zed editor (vim mode, Python LSP) |
+| `zsh`   | Zsh (Pure prompt, FZF, zoxide, aliases) |
+| `zshenv`| ZDOTDIR export |
 
-- **git**
-- **helix**
-- **zed**
-- **zsh** (with [pure](https://github.com/sindresorhus/pure) prompt)
+## Setup
 
-## Installation
-
-Clone this repository:
+### 1. Clone
 
 ```bash
-git clone https://github.com/derikoliveira/dotfiles.git
-cd dotfiles
+git clone https://github.com/derikoliveira/dotfiles.git ~/.config/dotfiles
+cd ~/.config/dotfiles
 ```
 
-Run the installation script:
+### 2. Install packages
 
+**macOS**
 ```bash
-chmod +x install.sh
-./install.sh
+brew install $(cat packages/brew.txt)
 ```
 
-## Requirements
+**Arch**
+```bash
+sudo pacman -S $(cat packages/pacman.txt)
+```
 
-Debian/Ubuntu-based system
+**Debian / Ubuntu / WSL**
+```bash
+sudo apt-get update && sudo xargs apt-get install -y < packages/apt.txt
+```
 
-## Notes
+> **apt only:** Install [helix](https://helix-editor.com/), [uv](https://docs.astral.sh/uv/getting-started/installation/), and [Docker](https://docs.docker.com/engine/install/) manually — they're not in standard apt repos.
 
-You can safely re-run the install script anytime.
-
-## Testing
-
-For a "fresh" test docker can be used:
+### 3. Install Python tools (via uv)
 
 ```bash
-docker rm -f ubuntu_test_1 >/dev/null 2>&1 || true && docker build . -t ubuntu_test:latest && docker run -it --rm --name ubuntu_test_1 ubuntu_test
-``
+uv tool install ruff
+uv tool install basedpyright
+```
+
+### 4. Install Pure prompt
+
+```bash
+git clone https://github.com/sindresorhus/pure.git ~/.config/zsh/pure
+```
+
+### 5. Stow configs
+
+```bash
+stow git helix nvim zed zsh zshenv
+```
+
+### 6. Set zsh as default shell
+
+```bash
+chsh -s $(which zsh)
+```
