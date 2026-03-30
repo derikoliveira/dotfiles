@@ -4,13 +4,13 @@ Personal configs managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Configs
 
-| Package | Description |
-|---------|-------------|
-| `git`   | Git config |
-| `nvim`  | Neovim config |
-| `zed`   | Zed editor (vim mode, Python LSP) |
-| `zsh`   | Zsh (Pure prompt, FZF, zoxide, aliases) |
-| `zshenv`| ZDOTDIR export |
+| Package  | Description                              |
+|----------|------------------------------------------|
+| `git`    | Git config                               |
+| `nvim`   | Neovim config                            |
+| `zed`    | Zed editor (vim mode, Python LSP)        |
+| `zsh`    | Zsh (Pure prompt, FZF, zoxide, aliases)  |
+| `zshenv` | ZDOTDIR export                           |
 
 ## Setup
 
@@ -38,7 +38,13 @@ sudo pacman -S $(cat packages/pacman.txt)
 sudo apt-get update && sudo xargs apt-get install -y < packages/apt.txt
 ```
 
-> **apt only:** Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Docker](https://docs.docker.com/engine/install/) manually — they're not in standard apt repos.
+#### Manual installs
+
+| Tool | Platforms | Reason |
+|------|-----------|--------|
+| [Neovim](https://github.com/neovim/neovim/releases) | All | Package managers may ship outdated versions |
+| [uv](https://docs.astral.sh/uv/getting-started/installation/) | apt | Not in standard apt repos |
+| [Docker](https://docs.docker.com/engine/install/) | apt | Not in standard apt repos |
 
 ### 3. Install Python tools (via uv)
 
