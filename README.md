@@ -7,7 +7,6 @@ Personal configs managed with [GNU Stow](https://www.gnu.org/software/stow/).
 | Package | Description |
 |---------|-------------|
 | `git`   | Git config |
-| `helix` | Helix editor (ayu_dark theme, Python LSP) |
 | `nvim`  | Neovim config |
 | `zed`   | Zed editor (vim mode, Python LSP) |
 | `zsh`   | Zsh (Pure prompt, FZF, zoxide, aliases) |
@@ -39,7 +38,7 @@ sudo pacman -S $(cat packages/pacman.txt)
 sudo apt-get update && sudo xargs apt-get install -y < packages/apt.txt
 ```
 
-> **apt only:** Install [helix](https://helix-editor.com/), [uv](https://docs.astral.sh/uv/getting-started/installation/), and [Docker](https://docs.docker.com/engine/install/) manually — they're not in standard apt repos.
+> **apt only:** Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Docker](https://docs.docker.com/engine/install/) manually — they're not in standard apt repos.
 
 ### 3. Install Python tools (via uv)
 
@@ -57,7 +56,7 @@ git clone https://github.com/sindresorhus/pure.git ~/.config/zsh/pure
 ### 5. Stow configs
 
 ```bash
-stow git helix nvim zed zsh zshenv
+stow git nvim zed zsh zshenv
 ```
 
 ### 6. Set zsh as default shell

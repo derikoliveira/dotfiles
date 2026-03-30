@@ -4,7 +4,6 @@ curl
 docker
 fzf
 git
-helix
 lsd
 ripgrep
 stow
