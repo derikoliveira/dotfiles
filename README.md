@@ -4,13 +4,10 @@ Personal configs managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Configs
 
-| Package  | Description                              |
-|----------|------------------------------------------|
-| `git`    | Git config                               |
-| `nvim`   | Neovim config                            |
-| `zed`    | Zed editor (vim mode, Python LSP)        |
-| `zsh`    | Zsh (Pure prompt, FZF, zoxide, aliases)  |
-| `zshenv` | ZDOTDIR export                           |
+- `git`
+- `nvim`
+- `zed`
+- `zsh`
 
 ## Setup
 
