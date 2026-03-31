@@ -13,6 +13,10 @@
       "rev": "1fc7f38b69cc4644505e3ff74ba69b1682a85dd9",
       "src": "https://github.com/ggandor/leap.nvim"
     },
+    "nvim-jdtls": {
+      "rev": "77ccaeb422f8c81b647605da5ddb4a7f725cda90",
+      "src": "https://codeberg.org/mfussenegger/nvim-jdtls"
+    },
     "nvim-surround": {
       "rev": "fcfa7e02323d57bfacc3a141f8a74498e1522064",
       "src": "https://github.com/kylechui/nvim-surround"

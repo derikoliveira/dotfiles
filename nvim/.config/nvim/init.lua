@@ -19,6 +19,7 @@ vim.pack.add {
   { src = "https://github.com/folke/which-key.nvim" },
   { src = "https://github.com/kylechui/nvim-surround" },
   { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://codeberg.org/mfussenegger/nvim-jdtls" },
 }
 
 -- LSP
@@ -85,8 +86,12 @@ map("n", "<leader>hn", function() harpoon:list():next() end, { desc = "Harpoon n
 require("nvim-surround").setup()
 
 require("conform").setup {
+  formatters = {
+    clang_format = { prepend_args = { "--style={BasedOnStyle: LLVM, Language: Java, ColumnLimit: 120, IndentWidth: 4}" } },
+  },
   formatters_by_ft = {
     lua = { "stylua" },
+    java = { "clang-format" },
   },
 }
 map("n", "<leader>cf", function() require("conform").format() end, { desc = "Format file" })
