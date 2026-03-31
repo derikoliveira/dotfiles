@@ -61,6 +61,7 @@ map({ "n", "v" }, "<Leader>y", '"+y')
 map({ "n", "v" }, "<Leader>Y", '"+Y')
 map("n", "<Leader>p", '"+p')
 map("n", "<Leader>P", '"+P')
+map("v", "<Leader>P", '"_d"+P')
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 local builtin = require "telescope.builtin"
