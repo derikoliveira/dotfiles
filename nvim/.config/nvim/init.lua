@@ -84,6 +84,13 @@ map("n", "<leader>hn", function() harpoon:list():next() end, { desc = "Harpoon n
 
 require("nvim-surround").setup()
 
+require("conform").setup {
+  formatters_by_ft = {
+    lua = { "stylua" },
+  },
+}
+map("n", "<leader>cf", function() require("conform").format() end, { desc = "Format file" })
+
 -- Autocmds
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking text",
