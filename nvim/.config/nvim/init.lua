@@ -91,7 +91,7 @@ require("conform").setup {
   },
   formatters_by_ft = {
     lua = { "stylua" },
-    java = { "clang-format" },
+    java = { "clang_format" },
   },
 }
 map("n", "<leader>cf", function() require("conform").format() end, { desc = "Format file" })
