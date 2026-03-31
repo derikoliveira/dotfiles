@@ -20,6 +20,7 @@ vim.pack.add {
   { src = "https://github.com/kylechui/nvim-surround" },
   { src = "https://github.com/stevearc/conform.nvim" },
   { src = "https://codeberg.org/mfussenegger/nvim-jdtls" },
+  { src = "https://github.com/rebelot/kanagawa.nvim" },
 }
 
 -- LSP
@@ -50,6 +51,8 @@ vim.lsp.config["jdtls"] = {
   filetypes = { "java" },
 }
 vim.lsp.enable "jdtls"
+
+vim.cmd.colorscheme "kanagawa"
 
 -- Config
 local map = vim.keymap.set
