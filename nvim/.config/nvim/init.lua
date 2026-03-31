@@ -8,11 +8,11 @@ vim.o.termguicolors = true
 vim.o.signcolumn = 'yes'
 
 -- LSP
-vim.lsp.config['lua-lsp'] = {
-    cmd = { '~/.luarocks/bin/lua-lsp' },
+vim.lsp.config['lua_ls'] = {
+    cmd = { 'lua-language-server' },
     filetypes = { 'lua' }
 }
-vim.lsp.enable('lua-lsp')
+vim.lsp.enable('lua_ls')
 
 vim.lsp.config['zls'] = {
 	cmd = { 'zls' },
