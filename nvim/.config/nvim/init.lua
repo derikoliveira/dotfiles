@@ -1,84 +1,92 @@
 -- Options
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.o.number = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.termguicolors = true
-vim.o.signcolumn = 'yes'
+vim.o.signcolumn = "yes"
 
 -- Plugins
-vim.pack.add({
-	{src = "https://github.com/nvim-lua/plenary.nvim"},
-	{src = "https://github.com/stevearc/oil.nvim"},
-	{src = "https://github.com/nvim-telescope/telescope.nvim", version="v0.2.0"},
-	{src = "https://github.com/nvim-treesitter/nvim-treesitter", version="main"},
-	{src = "https://github.com/ggandor/leap.nvim"},
-	{src = "https://github.com/ThePrimeagen/harpoon", version="harpoon2"},
-	{src = "https://github.com/folke/which-key.nvim"},
-	{src = "https://github.com/kylechui/nvim-surround"},
-	{src = "https://github.com/stevearc/conform.nvim"}, -- TODO: config
-})
+vim.pack.add {
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
+  { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/nvim-telescope/telescope.nvim", version = "v0.2.0" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  { src = "https://github.com/ggandor/leap.nvim" },
+  { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
+  { src = "https://github.com/folke/which-key.nvim" },
+  { src = "https://github.com/kylechui/nvim-surround" },
+  { src = "https://github.com/stevearc/conform.nvim" },
+}
 
 -- LSP
-vim.lsp.config['lua_ls'] = {
-	cmd = { 'lua-language-server' },
-	filetypes = { 'lua' }
+vim.lsp.config["lua_ls"] = {
+  cmd = { "lua-language-server" },
+  filetypes = { "lua" },
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" }, -- Neovim uses LuaJIT
+      workspace = {
+        checkThirdParty = false,
+        library = vim.api.nvim_get_runtime_file("", true), -- aware of nvim runtime
+      },
+      diagnostics = { globals = { "vim" } }, -- no 'undefined global vim' warnings
+    },
+  },
 }
-vim.lsp.enable('lua_ls')
+vim.lsp.enable "lua_ls"
 
-vim.lsp.config['zls'] = {
-	cmd = { 'zls' },
-	filetypes = { 'zig' }
+vim.lsp.config["zls"] = {
+  cmd = { "zls" },
+  filetypes = { "zig" },
 }
-vim.lsp.enable('zls')
+vim.lsp.enable "zls"
 
-vim.lsp.config['jdtls'] = {
-	cmd = { 'jdtls' },
-	filetypes = { 'java' }
+vim.lsp.config["jdtls"] = {
+  cmd = { "jdtls" },
+  filetypes = { "java" },
 }
-vim.lsp.enable('jdtls')
+vim.lsp.enable "jdtls"
 
 -- Config
 local map = vim.keymap.set
 
-map({'n', 'v'}, '<Leader>y', '"+y')
-map({'n', 'v'}, '<Leader>Y', '"+Y')
-map('n', '<Leader>p', '"+p')
-map('n', '<Leader>P', '"+P')
-map('n', '<Esc>', '<cmd>nohlsearch<CR>')
+map({ "n", "v" }, "<Leader>y", '"+y')
+map({ "n", "v" }, "<Leader>Y", '"+Y')
+map("n", "<Leader>p", '"+p')
+map("n", "<Leader>P", '"+P')
+map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-local builtin = require('telescope.builtin')
-map('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-map('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-map('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-map('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+local builtin = require "telescope.builtin"
+map("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
+map("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+map("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
 require("oil").setup()
 map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
-map({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
-map('n', 'S', '<Plug>(leap-from-window)')
+map({ "n", "x", "o" }, "s", "<Plug>(leap)")
+map("n", "S", "<Plug>(leap-from-window)")
 
-local harpoon = require("harpoon")
+local harpoon = require "harpoon"
 harpoon:setup()
-map("n", "<leader>ha", function() harpoon:list():add() end, { desc = 'Harpoon add' })
-map("n", "<leader>ht", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Harpoon toggle quick menu' })
-map("n", "<leader>q", function() harpoon:list():select(1) end, { desc = 'Harpoon select 1' })
-map("n", "<leader>w", function() harpoon:list():select(2) end, { desc = 'Harpoon select 2' })
-map("n", "<leader>e", function() harpoon:list():select(3) end, { desc = 'Harpoon select 3' })
-map("n", "<leader>r", function() harpoon:list():select(4) end, { desc = 'Harpoon select 4' })
-map("n", "<leader>hp", function() harpoon:list():prev() end, { desc = 'Harpoon previous' })
-map("n", "<leader>hn", function() harpoon:list():next() end, { desc = 'Harpoon next' })
+map("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon add" })
+map("n", "<leader>ht", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon toggle quick menu" })
+map("n", "<leader>q", function() harpoon:list():select(1) end, { desc = "Harpoon select 1" })
+map("n", "<leader>w", function() harpoon:list():select(2) end, { desc = "Harpoon select 2" })
+map("n", "<leader>e", function() harpoon:list():select(3) end, { desc = "Harpoon select 3" })
+map("n", "<leader>r", function() harpoon:list():select(4) end, { desc = "Harpoon select 4" })
+map("n", "<leader>hp", function() harpoon:list():prev() end, { desc = "Harpoon previous" })
+map("n", "<leader>hn", function() harpoon:list():next() end, { desc = "Harpoon next" })
 
 require("nvim-surround").setup()
 
 -- Autocmds
-vim.api.nvim_create_autocmd('TextYankPost', {
-	desc = 'Highlight when yanking text',
-	group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight when yanking text",
+  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+  callback = function() vim.highlight.on_yank() end,
 })
