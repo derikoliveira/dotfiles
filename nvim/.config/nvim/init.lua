@@ -20,6 +20,12 @@ vim.lsp.config['zls'] = {
 }
 vim.lsp.enable('zls')
 
+vim.lsp.config['jdtls'] = {
+	cmd = { 'jdtls' },
+	filetypes = { 'java' }
+}
+vim.lsp.enable('jdtls')
+
 -- Plugins
 vim.pack.add({
 	{src = "https://github.com/nvim-lua/plenary.nvim"},
