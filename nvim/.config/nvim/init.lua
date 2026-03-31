@@ -66,6 +66,10 @@ map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
 map("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 map("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
+require("nvim-treesitter").setup {
+  ensure_installed = { "lua", "zig", "java" },
+}
+
 require("oil").setup()
 map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
