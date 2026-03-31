@@ -6,7 +6,6 @@ Personal configs managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 - `git`
 - `nvim`
-- `zed`
 - `zsh`
 
 ## Setup
@@ -59,7 +58,7 @@ git clone https://github.com/sindresorhus/pure.git ~/.config/zsh/pure
 ### 5. Stow configs
 
 ```bash
-stow git nvim zed zsh zshenv
+stow git nvim zsh zshenv
 ```
 
 ### 6. Set zsh as default shell
