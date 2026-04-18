@@ -64,6 +64,8 @@ map("n", "<Leader>P", '"+P')
 map("v", "<Leader>P", '"_d"+P')
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+map("i", "<C-Space>", function() vim.lsp.completion.get() end, { desc = "Trigger LSP completion" })
+
 local builtin = require "telescope.builtin"
 map("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
@@ -110,3 +112,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
   callback = function() vim.highlight.on_yank() end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "Enable LSP completion",
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client:supports_method "textDocument/completion" then vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = false }) end
+  end,
+})
+
