@@ -121,3 +121,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "Map go to definition",
+	callback = function(args)
+		map("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
+	end
+})
+
