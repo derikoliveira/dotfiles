@@ -63,8 +63,8 @@ map("n", "<Leader>p", '"+p')
 map("n", "<Leader>P", '"+P')
 map("v", "<Leader>P", '"_d"+P')
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
 map("i", "<C-Space>", function() vim.lsp.completion.get() end, { desc = "Trigger LSP completion" })
+map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostic for the line under the cursor" })
 
 local builtin = require "telescope.builtin"
 map("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
