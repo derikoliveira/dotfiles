@@ -122,9 +122,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	desc = "Map go to definition",
-	callback = function(args)
-		map("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
-	end
+  desc = "Map go to definition",
+  callback = function(args) map("n", "gd", vim.lsp.buf.definition, { buffer = args.buf }) end,
 })
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "Add folding based on LSP",
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client:supports_method "textDocument/foldingRange" then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldmethod = "expr"
+      vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+	  vim.wo[win][0].foldlevel = 99
+    end
+  end,
+})
