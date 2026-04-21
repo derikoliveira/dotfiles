@@ -58,7 +58,7 @@ git clone https://github.com/sindresorhus/pure.git ~/.config/zsh/pure
 ### 5. Stow configs
 
 ```bash
-stow git ghostty nvim zsh zshenv
+stow -t $HOME git ghostty nvim zsh zshenv
 ```
 
 ### 6. Set zsh as default shell
