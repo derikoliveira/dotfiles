@@ -29,6 +29,11 @@ brew install $(cat packages/brew.txt)
 sudo pacman -S $(cat packages/pacman.txt)
 ```
 
+**Fedora**
+```bash
+sudo dnf install $(cat packages/dnf.txt)
+```
+
 **Debian / Ubuntu / WSL**
 ```bash
 sudo apt-get update && sudo xargs apt-get install -y < packages/apt.txt
@@ -40,7 +45,7 @@ sudo apt-get update && sudo xargs apt-get install -y < packages/apt.txt
 |------|-----------|--------|
 | [Neovim](https://github.com/neovim/neovim/releases) | All | Package managers may ship outdated versions |
 | [uv](https://docs.astral.sh/uv/getting-started/installation/) | apt | Not in standard apt repos |
-| [Docker](https://docs.docker.com/engine/install/) | apt | Not in standard apt repos |
+| [Docker](https://docs.docker.com/engine/install/) | apt, dnf | Not in standard apt/dnf repos |
 
 ### 3. Install Python tools (via uv)
 
