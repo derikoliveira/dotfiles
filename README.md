@@ -1,12 +1,11 @@
 # Dotfiles
 
-Personal configs managed with [GNU Stow](https://www.gnu.org/software/stow/).
+My configs in one place, plus what's needed to bring up a new machine.
 
-## Configs
-
-- `git`
-- `nvim`
-- `zsh`
+Each tool gets its own directory, symlinked into place with [GNU
+Stow](https://www.gnu.org/software/stow/), so a machine takes only what it
+needs. Package lists cover macOS, Arch, Debian/Ubuntu, and Fedora. No install
+script and nothing to learn: clone, install the packages, stow what you want.
 
 ## Setup
 
@@ -50,6 +49,8 @@ sudo dnf install $(cat packages/dnf.txt)
 | [Neovim](https://github.com/neovim/neovim/releases)           | All       | Package managers may ship outdated versions |
 | [uv](https://docs.astral.sh/uv/getting-started/installation/) | apt       | Not in standard apt repos                   |
 | [Docker](https://docs.docker.com/engine/install/)             | apt, dnf  | Not in standard apt/dnf repos               |
+| [Rust (rustup)](https://rustup.rs)                            | All       | Package managers may ship outdated versions |
+| [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)  | All       | Not available via package managers          |
 
 ### 3. Install Python tools (via uv)
 
