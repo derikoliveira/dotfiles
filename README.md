@@ -19,33 +19,37 @@ cd ~/.config/dotfiles
 
 ### 2. Install packages
 
-**macOS**
+#### macOS
+
 ```bash
 brew install $(cat packages/brew.txt)
 ```
 
-**Arch**
+#### Arch
+
 ```bash
 sudo pacman -S $(cat packages/pacman.txt)
 ```
 
-**Fedora**
-```bash
-sudo dnf install $(cat packages/dnf.txt)
-```
+#### Debian / Ubuntu / WSL
 
-**Debian / Ubuntu / WSL**
 ```bash
 sudo apt-get update && sudo xargs apt-get install -y < packages/apt.txt
 ```
 
+#### Fedora
+
+```bash
+sudo dnf install $(cat packages/dnf.txt)
+```
+
 #### Manual installs
 
-| Tool | Platforms | Reason |
-|------|-----------|--------|
-| [Neovim](https://github.com/neovim/neovim/releases) | All | Package managers may ship outdated versions |
-| [uv](https://docs.astral.sh/uv/getting-started/installation/) | apt | Not in standard apt repos |
-| [Docker](https://docs.docker.com/engine/install/) | apt, dnf | Not in standard apt/dnf repos |
+| Tool                                                          | Platforms | Reason                                      |
+| ------------------------------------------------------------- | --------- | ------------------------------------------- |
+| [Neovim](https://github.com/neovim/neovim/releases)           | All       | Package managers may ship outdated versions |
+| [uv](https://docs.astral.sh/uv/getting-started/installation/) | apt       | Not in standard apt repos                   |
+| [Docker](https://docs.docker.com/engine/install/)             | apt, dnf  | Not in standard apt/dnf repos               |
 
 ### 3. Install Python tools (via uv)
 
