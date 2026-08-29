@@ -217,6 +217,7 @@
   boot.kernelModules = [ "nct6775" ];
 
   programs.zsh.enable = true;
+  programs.nix-ld.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w" # Required for sublime4
