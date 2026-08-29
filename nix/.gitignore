@@ -1,0 +1,6 @@
+# Nix build output symlinks
+result
+result-*
+
+# Machine-specific, regenerate per host instead of committing
+hardware-configuration.nix
