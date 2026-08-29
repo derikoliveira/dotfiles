@@ -126,6 +126,7 @@
     git
     lm_sensors
     spotify
+    sublime4
     vim-full
     wget
     wl-clipboard
@@ -216,4 +217,8 @@
   boot.kernelModules = [ "nct6775" ];
 
   programs.zsh.enable = true;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1w" # Required for sublime4
+  ];
 }
