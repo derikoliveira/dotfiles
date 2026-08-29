@@ -50,6 +50,7 @@
     };
     initContent = ''
       fpath+=("${pkgs.pure-prompt}/share/zsh/site-functions")
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
       autoload -U promptinit && promptinit
       prompt pure
     '';
