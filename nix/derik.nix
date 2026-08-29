@@ -13,6 +13,7 @@
     fd
     fnm
     gh
+    jdk25
     uv
     zed-editor
   ];
