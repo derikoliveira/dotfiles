@@ -14,6 +14,9 @@
     uv
     zed-editor
   ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
   home.stateVersion = "26.05";
 
   programs.fzf = {
