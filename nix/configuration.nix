@@ -123,7 +123,7 @@
     btop
     curl
     ghostty
-    git    
+    git
     lm_sensors
     spotify
     vim-full
@@ -164,22 +164,22 @@
     enable = true;
     enable32Bit = true;
   };
-  
+
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
-  
+
   hardware.nvidia = {
     # Modesetting is required for Wayland (nvidia_drm.modeset=1)
     modesetting.enable = true;
-  
+
     # Helps with suspend/resume and power-state transition bugs —
     # exactly the kind of issue you're hitting on logout/login
     powerManagement.enable = true;
-  
+
     # Open kernel modules — only for Turing (RTX 20-series) or newer.
     # Set false if your GPU is older.
     open = true;
-  
+
     # package = config.boot.kernelPackages.nvidiaPackages.stable;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
