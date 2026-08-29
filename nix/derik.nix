@@ -6,10 +6,12 @@
   };
   home.homeDirectory = "/home/derik";
   home.packages = with pkgs; [
+    awscli2
     bat
     claude-code
     codex
     fd
+    fnm
     gh
     uv
     zed-editor
@@ -58,6 +60,7 @@
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
       autoload -U promptinit && promptinit
       prompt pure
+      eval "$(fnm env --use-on-cd --shell zsh)"
     '';
   };
 }
