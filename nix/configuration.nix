@@ -91,7 +91,7 @@
   users.users."derik" = {
     isNormalUser = true;
     description = "Derik";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
@@ -218,6 +218,8 @@
 
   programs.zsh.enable = true;
   programs.nix-ld.enable = true;
+
+  virtualisation.docker.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w" # Required for sublime4
