@@ -7,6 +7,8 @@
   home.homeDirectory = "/home/derik";
   home.packages = with pkgs; [
     bat
+    claude-code
+    codex
     fd
     gh
     uv
