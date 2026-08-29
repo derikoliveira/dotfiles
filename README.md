@@ -76,3 +76,12 @@ stow -t $HOME git ghostty nvim zsh zshenv
 ```bash
 chsh -s $(which zsh)
 ```
+
+## NixOS
+
+On NixOS the manual setup above doesn't apply. Instead, [`nix/`](nix) holds a
+flake with the full system configuration and per-user
+[home-manager](https://github.com/nix-community/home-manager) setups, covering
+packages, desktop environment, and user configs declaratively.
+
+See [`nix/README.md`](nix/README.md) for details.
