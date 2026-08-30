@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     awscli2
     bat
+    bruno
     claude-code
     codex
     fd
@@ -15,6 +16,7 @@
     gh
     jdk25
     uv
+    vscode
     zed-editor
   ];
   home.sessionPath = [
