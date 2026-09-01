@@ -15,6 +15,7 @@
     fnm
     gh
     jdk25
+    obsidian
     uv
     vscode
     zed-editor
