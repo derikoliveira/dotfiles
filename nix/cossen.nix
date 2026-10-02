@@ -8,6 +8,7 @@
     discord
     librewolf
     google-chrome
+    signal-desktop
     steam
   ];
 

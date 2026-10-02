@@ -14,8 +14,11 @@
     fd
     fnm
     gh
+    google-chrome
     jdk25
+    libreoffice-qt
     obsidian
+    signal-desktop
     uv
     vscode
     zed-editor
