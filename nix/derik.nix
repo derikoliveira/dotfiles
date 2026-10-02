@@ -15,6 +15,7 @@
     fnm
     gh
     google-chrome
+    (callPackage ./helium.nix { })
     jdk25
     libreoffice-qt
     obsidian
