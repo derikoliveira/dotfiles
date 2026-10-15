@@ -19,3 +19,22 @@ sudo passwd cossen
 ```bash
 sudo nixos-rebuild switch --flake /etc/nixos
 ```
+
+### Updating
+
+```bash
+nix flake update
+sudo nixos-rebuild switch --flake /etc/nixos
+```
+
+### Updating Helium
+
+Helium isn't in nixpkgs, so it's packaged in `helium.nix` and pinned to a
+release. Check the latest version at
+<https://github.com/imputnet/helium-linux/releases>, then get its hash:
+
+```bash
+nix store prefetch-file https://github.com/imputnet/helium-linux/releases/download/<version>/helium-<version>-x86_64_linux.tar.xz
+```
+
+Set `version` and `hash` in `helium.nix` to the new values, then rebuild.
