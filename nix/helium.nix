@@ -24,11 +24,11 @@
 
 stdenv.mkDerivation rec {
   pname = "helium";
-  version = "0.19.3.1";
+  version = "0.20.3.1";
 
   src = fetchurl {
     url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-x86_64_linux.tar.xz";
-    hash = "sha256-j04BK12SH6WSaar5xUFgq/cpTGM7Gmql7bdyWUUxRXA=";
+    hash = "sha256-N1nqTpW/TvSgpkd+PXNXaw8DkG8ugDVydb/Gysr7X6w=";
   };
 
   nativeBuildInputs = [ autoPatchelfHook makeWrapper ];

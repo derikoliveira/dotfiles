@@ -117,6 +117,18 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Daily rebuild against the latest inputs, without touching flake.lock in the repo.
+  system.autoUpgrade = {
+    enable = true;
+    flake = "/etc/nixos";
+    flags = [ "--recreate-lock-file" "--no-write-lock-file" ];
+  };
+
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 14d";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

@@ -22,6 +22,9 @@ sudo nixos-rebuild switch --flake /etc/nixos
 
 ### Updating
 
+`system.autoUpgrade` rebuilds daily against the latest inputs without writing
+`flake.lock`, so there's nothing to do by hand. To bump the lock manually:
+
 ```bash
 nix flake update
 sudo nixos-rebuild switch --flake /etc/nixos
