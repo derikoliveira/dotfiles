@@ -19,6 +19,7 @@
     jdk25
     libreoffice-qt
     obsidian
+    poetry
     signal-desktop
     uv
     vscode
