@@ -137,6 +137,7 @@
     ghostty
     git
     lm_sensors
+    mpv
     spotify
     sublime4
     vim-full
