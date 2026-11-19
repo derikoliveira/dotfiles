@@ -11,6 +11,7 @@
     bruno
     claude-code
     codex
+    dbeaver-bin
     fd
     fnm
     gh
@@ -21,6 +22,7 @@
     obsidian
     poetry
     signal-desktop
+    sqlite
     uv
     vscode
     zed-editor
