@@ -12,6 +12,7 @@
     claude-code
     codex
     dbeaver-bin
+    discord
     fd
     fnm
     gh
