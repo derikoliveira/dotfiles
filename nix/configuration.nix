@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -232,6 +232,17 @@
   programs.nix-ld.enable = true;
 
   virtualisation.docker.enable = true;
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mysql84;
+    ensureUsers = [{
+      name = "derik";
+      ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
+    }];
+  };
+  # Don't start at boot
+  systemd.services.mysql.wantedBy = lib.mkForce [ ];
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w" # Required for sublime4
