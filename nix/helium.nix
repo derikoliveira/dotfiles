@@ -19,7 +19,13 @@
   systemd,
   vulkan-loader,
   wayland,
-  xorg,
+  libxcb,
+  libx11,
+  libxcomposite,
+  libxdamage,
+  libxext,
+  libxfixes,
+  libxrandr,
 }:
 
 stdenv.mkDerivation rec {
@@ -42,13 +48,13 @@ stdenv.mkDerivation rec {
     libgbm
     libxkbcommon
     nss
-    xorg.libxcb
-    xorg.libX11
-    xorg.libXcomposite
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXrandr
+    libxcb
+    libx11
+    libxcomposite
+    libxdamage
+    libxext
+    libxfixes
+    libxrandr
   ];
 
   # Chromium dlopen()s these at runtime, so autoPatchelf can't see them.
