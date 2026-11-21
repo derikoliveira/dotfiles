@@ -194,8 +194,7 @@
     # Set false if your GPU is older.
     open = true;
 
-    # package = config.boot.kernelPackages.nvidiaPackages.stable;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   environment.etc."vimrc".text = ''
