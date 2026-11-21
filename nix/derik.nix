@@ -1,4 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
+let
+  mysqlDir = "${config.home.homeDirectory}/.local/share/mysql";
+  # Runs on every start (idempotent): derik logs in via unix socket (auth_socket), no password; no root.
+  mysqlInit = pkgs.writeText "mysql-init.sql" ''
+    CREATE USER IF NOT EXISTS 'derik'@'localhost' IDENTIFIED WITH auth_socket;
+    GRANT ALL PRIVILEGES ON *.* TO 'derik'@'localhost' WITH GRANT OPTION;
+    DROP USER IF EXISTS 'root'@'localhost';
+  '';
+  mysqldArgs = "--basedir=${pkgs.mysql84} --datadir=${mysqlDir}/data";
+in
 {
   home.username = "derik";
   home.shellAliases = {
@@ -19,6 +29,7 @@
     google-chrome
     (callPackage ./helium.nix { })
     jdk25
+    mysql84
     libreoffice-qt
     obsidian
     poetry
@@ -32,6 +43,24 @@
     "$HOME/.local/bin"
   ];
   home.stateVersion = "26.05";
+
+  home.file.".my.cnf".text = ''
+    [client]
+    socket=${mysqlDir}/mysql.sock
+  '';
+
+  # MySQL server, runs as derik only. Not started at login: `systemctl --user start mysql`.
+  systemd.user.services.mysql = {
+    Unit.Description = "MySQL server";
+    Service = {
+      ExecStartPre = "${pkgs.writeShellScript "mysql-initdb" ''
+        [ -d ${mysqlDir}/data ] && exit 0
+        mkdir -p ${mysqlDir}
+        exec ${pkgs.mysql84}/bin/mysqld ${mysqldArgs} --initialize-insecure
+      ''}";
+      ExecStart = "${pkgs.mysql84}/bin/mysqld ${mysqldArgs} --socket=${mysqlDir}/mysql.sock --bind-address=127.0.0.1 --plugin-load-add=auth_socket.so --init-file=${mysqlInit}";
+    };
+  };
 
   programs.fzf = {
     changeDirWidgetCommand = "fd --type d --hidden --exclude .git";

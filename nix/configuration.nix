@@ -233,16 +233,6 @@
 
   virtualisation.docker.enable = true;
 
-  # MySQL server (system daemon). derik logs in via unix socket (auth_socket), no password.
-  services.mysql = {
-    enable = true;
-    package = pkgs.mysql84;
-    ensureUsers = [{
-      name = "derik";
-      ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
-    }];
-  };
-
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w" # Required for sublime4
   ];
