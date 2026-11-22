@@ -232,6 +232,7 @@
   programs.nix-ld.enable = true;
 
   virtualisation.docker.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
 
   services.mysql = {
     enable = true;
