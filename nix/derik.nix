@@ -31,6 +31,7 @@
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
+  home.sessionVariables.SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
   home.stateVersion = "26.05";
 
   programs.fzf = {
