@@ -8,7 +8,13 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.derik = import ./derik.nix;
+  home-manager.users.cossen = import ./cossen.nix;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -127,11 +133,10 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Daily rebuild against the latest inputs, without touching flake.lock in the repo.
+  # Daily rebuild after updating all channels (nixos and home-manager).
   system.autoUpgrade = {
     enable = true;
-    flake = "/etc/nixos";
-    flags = [ "--recreate-lock-file" "--no-write-lock-file" ];
+    flags = [ "--upgrade-all" ];
   };
 
   nix.gc = {

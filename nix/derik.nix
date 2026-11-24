@@ -35,8 +35,8 @@
   home.stateVersion = "26.05";
 
   programs.fzf = {
-    changeDirWidgetCommand = "fd --type d --hidden --exclude .git";
-    changeDirWidgetOptions = [
+    changeDirWidget.command = "fd --type d --hidden --exclude .git";
+    changeDirWidget.options = [
       "--preview 'lsd -la --color=always {}'"
     ];
     defaultOptions = [
@@ -48,8 +48,8 @@
     ];
     enable = true;
     enableZshIntegration = true;
-    fileWidgetCommand = "fd --type f --hidden --exclude .git";
-    fileWidgetOptions = [
+    fileWidget.command = "fd --type f --hidden --exclude .git";
+    fileWidget.options = [
       "--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
     ];
   };

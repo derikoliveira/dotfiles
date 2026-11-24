@@ -1,6 +1,6 @@
 # NixOS
 
-NixOS system config and home-manager, managed as a flake.
+NixOS system config and home-manager, managed with channels (nixos-unstable and home-manager master).
 
 ## Notes
 
@@ -14,20 +14,29 @@ sudo passwd derik
 sudo passwd cossen
 ```
 
+### Channels
+
+Set up once, as root:
+
+```bash
+sudo nix-channel --add https://channels.nixos.org/nixos-unstable nixos
+sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+sudo nix-channel --update
+```
+
 ### Applying changes
 
 ```bash
-sudo nixos-rebuild switch --flake /etc/nixos
+sudo nixos-rebuild switch
 ```
 
 ### Updating
 
-`system.autoUpgrade` rebuilds daily against the latest inputs without writing
-`flake.lock`, so there's nothing to do by hand. To bump the lock manually:
+`system.autoUpgrade` updates all channels and rebuilds daily, so there's nothing
+to do by hand. To update now:
 
 ```bash
-nix flake update
-sudo nixos-rebuild switch --flake /etc/nixos
+sudo nixos-rebuild switch --upgrade-all
 ```
 
 ### Updating Helium
