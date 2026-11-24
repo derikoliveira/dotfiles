@@ -52,9 +52,27 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = false;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # GNOME Desktop Environment.
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  environment.gnome.excludePackages = with pkgs; [ epiphany geary gnome-tour totem ];
+
+  # GNOME defaults: no mouse acceleration, window buttons, extensions.
+  programs.dconf.profiles.user.databases = [{
+    settings = {
+      "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
+      "org/gnome/desktop/wm/preferences".button-layout = ":minimize,maximize,close";
+      "org/gnome/shell".enabled-extensions = [
+        "appindicatorsupport@rgcjonas.gmail.com"
+        "clipboard-indicator@tudmotu.com"
+        "dash-to-dock@micxgx.gmail.com"
+        "ding@rastersoft.com"
+        "tilingshell@ferrarodomenico.com"
+      ];
+      "org/gnome/shell/extensions/dash-to-dock".dock-fixed = true;
+    };
+  }];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -92,10 +110,6 @@
     isNormalUser = true;
     description = "Derik";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
     shell = pkgs.zsh;
   };
 
@@ -103,10 +117,6 @@
     isNormalUser = true;
     description = "Cossen";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
   };
 
   # Install firefox.
@@ -134,6 +144,13 @@
   environment.systemPackages = with pkgs; [
     btop
     curl
+    gnome-extension-manager
+    gnome-tweaks
+    gnomeExtensions.appindicator
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.desktop-icons-ng-ding
+    gnomeExtensions.tiling-shell
     ghostty
     git
     lm_sensors
